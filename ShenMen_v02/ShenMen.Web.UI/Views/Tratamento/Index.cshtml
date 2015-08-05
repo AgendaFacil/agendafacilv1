@@ -1,0 +1,66 @@
+﻿@model IEnumerable<ShenMen.Dominio.Profissional_TratamentoViewModel>
+
+@{
+    ViewBag.Title = "Lista de Tratamentos";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main" class="container-fluid">
+    <h1 class="page-header">Lista de Tratamentos</h1>
+    <div class="row">
+    </div>
+
+    <div class="panel panel-default ">
+        <div class="panel-heading">
+            Filtro de Busca
+        </div>
+        <div class="panel-body ">
+            <div class="form-group input-group">
+                <input type="text" class="form-control" id="txtBusca" name="txtBusca" placeholder="Procurar por Profissional" onkeyup="PesquisarTratamento()">
+                <span class="input-group-btn"><button class="btn btn-default" id="searchButton" type="button" onclick="PesquisarTratamento()"><img src="/Images/icone_lupa.png" style="width: 16px;" /></button></span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default  ">
+        <div class="panel-heading">
+            Resultados
+            <div class="pull-right">
+                <div class="btn-group">
+                    <a href="/Tratamento/Cadastrar" class="btn btn-primary btn-xs ">Novo Tratamento</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped" id="tabelaTratamento">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PROFISSIONAL.NOME)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DESCRICAO)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PROFISSIONAL.NOME)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DESCRICAO)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Editar", new { id = item.ID_TRATAMENTO }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.ID_TRATAMENTO }, new { @class = "btn btn-warning btn-xs" })
+                                @Html.ActionLink("Bloquear", "Bloquear", new { id = item.ID_TRATAMENTO }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

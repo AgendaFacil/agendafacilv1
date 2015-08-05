@@ -1,0 +1,73 @@
+﻿@model IEnumerable<ShenMen.Dominio.Cliente>
+
+@{
+    ViewBag.Title = "Lista de Clientes";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="main" class="container-fluid">
+    <h1 class="page-header">Lista de Clientes</h1>
+    <div class="row">
+    </div>
+
+    <div class="panel panel-default ">
+        <div class="panel-heading">
+            Filtro de Busca
+        </div>
+        <div class="panel-body ">
+            <div class="form-group input-group">
+                <input type="text" class="form-control" id="txtBusca" name="txtBusca" placeholder="Procurar por Nome" onkeyup="PesquisarCliente()">
+                <span class="input-group-btn"><button class="btn btn-default" id="searchButton" type="button" onclick="PesquisarCliente()"><img src="/Images/icone_lupa.png" style="width: 16px;" /></button></span>
+            </div>
+        </div>
+    </div>
+    <div class="panel panel-default  ">
+        <div class="panel-heading">
+            Resultados
+            <div class="pull-right">
+                <div class="btn-group">
+                    <a href="/Cliente/Cadastrar" class="btn btn-primary btn-xs ">Novo Cliente</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped" id="tabelaCliente">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.NOME)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TELEFONE)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.EMAIL)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.NOME)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TELEFONE)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EMAIL)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Editar", new { id = item.ID_CLIENTE }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.ID_CLIENTE }, new { @class = "btn btn-warning btn-xs" })
+                                @Html.ActionLink("Bloquear", "Bloquear", new { id = item.ID_CLIENTE }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="pagination pagination-right"></div>
+        </div>
+    </div>
+</div>

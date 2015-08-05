@@ -1,0 +1,64 @@
+﻿@model IEnumerable<ShenMen.Dominio.Consulta>
+
+@{
+    ViewBag.Title = "Listar";
+}
+
+<div id="main" class="container-fluid">
+    <div class="panel panel-default  ">
+        <div class="panel-heading">
+            Resultados
+        </div>
+        <div class="panel-body">
+            <div class="dataTable_wrapper">
+                <table class="table table-striped">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DATA_CONSULTA)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.HORARIO_CONSULTA)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CLIENTE.NOME)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.TRATAMENTO.DESCRICAO)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.PROFISSIONAL.NOME)
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DATA_CONSULTA)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.HORARIO_CONSULTA)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CLIENTE.NOME)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.TRATAMENTO.DESCRICAO)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.PROFISSIONAL.NOME)
+                            </td>
+                            <td>
+                                @Html.ActionLink("Editar", "Editar", new { id = item.ID_CONSULTA }, new { @class = "btn btn-success btn-xs" })
+                                @Html.ActionLink("Detalhes", "Detalhes", new { id = item.ID_CONSULTA }, new { @class = "btn btn-warning btn-xs" })
+                                @Html.ActionLink("Excluir", "Excluir", new { id = item.ID_CONSULTA }, new { @class = "btn btn-danger btn-xs" })
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
